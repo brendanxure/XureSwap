@@ -25,8 +25,8 @@ const Swap = () => {
                 </div>
                 <div className='my-6 text-center flex flex-col w-full'>
                     <h2 className=''>Step 2.</h2>
-                    <h3 className='my-2'>Current price 1 ARb = 1.229$</h3>
-                    <h3 className='bg-[#A2CDFF] rounded-lg contrast-150 opacity-40 px-4 py-2 text-[#1A202C] mt-2 w-full mx-auto font-semibold cursor-pointer'>Sell all ARb (Degen mode)</h3>
+                    <h3 className='my-2'>Current price 1 ARB = 1.229$</h3>
+                    <h3 className='bg-[#A2CDFF] rounded-lg contrast-150 opacity-40 px-4 py-2 text-[#1A202C] mt-2 w-full mx-auto font-semibold cursor-pointer'>Sell all ARB (Degen mode)</h3>
                 </div>
                 <div className='w-full relative'>
                     <h2 className='text-center my-2'>OR</h2>
@@ -34,7 +34,7 @@ const Swap = () => {
                         <div className='bg-[#141619] p-4 rounded-lg'>
                             <h3 className='text-[#A2A2A2]'>You sell</h3>
                             <div className='md:flex md:justify-between gap-4'>
-                                <h3 className='bg-[#222429] py-2 px-4 text-center rounded-md my-2 max-w-[20%]'>ARb</h3>
+                                <h3 className='bg-[#222429] py-2 px-4 text-center rounded-md my-2 max-w-[20%]'>ARB</h3>
                                 <input type='number' placeholder='10' className='text-[40px] bg-transparent outline-none w-full md:justify-end' />
                             </div>
                             <p className='text-[#A2A2A2]'>~$12.3</p>
