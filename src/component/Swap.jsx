@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {AiOutlineArrowDown} from 'react-icons/ai'
 import {SlArrowDown} from 'react-icons/sl'
 import {MdArrowForwardIos} from 'react-icons/md'
+import tokenList from '../tokenList.json'
 
 const Swap = () => {
+    const [tokenOne , setTokenOne] = useState(tokenList[0])
+    const [tokenTwo, setTokenTwo] = useState(tokenList[1])
+
+    const tokenChange= () => {
+        const one = tokenOne
+        const two = tokenTwo
+        setTokenOne(two)
+        setTokenTwo(one)
+    }
   return (
     <div>
         <div className='w-full grid p-4 gap-4'>
@@ -34,16 +44,22 @@ const Swap = () => {
                         <div className='bg-[#141619] p-4 rounded-lg'>
                             <h3 className='text-[#A2A2A2]'>You sell</h3>
                             <div className='md:flex md:justify-between gap-4'>
-                                <h3 className='bg-[#222429] py-2 px-4 text-center rounded-md my-2 max-w-[20%]'>ARB</h3>
+                                <h3 className='flex w-full bg-[#222429] py-2 px-4 text-center rounded-md my-2 max-w-[20%]'>
+                                    <img src={tokenOne?.img} className='w-8 h-8' alt={tokenOne?.ticker} />
+                                    <h4>{tokenOne?.name}</h4>
+                                </h3>
                                 <input type='number' placeholder='10' className='text-[40px] bg-transparent outline-none w-full md:justify-end' />
                             </div>
                             <p className='text-[#A2A2A2]'>~$12.3</p>
                         </div>
-                        <div className='bg-[#222429] py-3 px-4 absolute top-[50%] left-[47%] rounded-lg'><AiOutlineArrowDown size={20}/></div>
+                        <div onClick={()=> tokenChange()} className='bg-[#222429] py-3 px-4 absolute top-[50%] left-[47%] rounded-lg'><AiOutlineArrowDown size={20}/></div>
                         <div className='bg-[#141619] p-4 mt-2 rounded-lg'>
                             <h3 className='text-[#A2A2A2]'>You buy</h3>
                             <div className='md:flex md:justify-between gap-4'>
-                                <h3 className='bg-[#222429] py-2 px-4 text-center rounded-md my-2 max-w-[20%]'>ETH</h3>
+                                <h3 className='flex bg-[#222429] gap-2 w-full py-2 px-4 text-center rounded-md my-2 max-w-[20%]'>
+                                    <img src={tokenTwo?.img} className='w-8 h-8' alt={tokenTwo?.ticker} />
+                                    <h4>{tokenTwo?.name}</h4>
+                                </h3>
                                 <input type='number' placeholder='0.0067873949' className='text-[40px] bg-transparent outline-none w-full md:justify-end scrollbar-hide' />
                             </div>
                             <p className='text-[#A2A2A2]'>~$12.3(-0.16%)</p>

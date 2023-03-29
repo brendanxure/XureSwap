@@ -1,11 +1,11 @@
 import React from 'react';
-import Swap from './pages/Swap';
+import SwapPage from './pages/SwapPage';
 
 
 function App() {
   return (
     <div>
-      <Swap />
+      <SwapPage />
     </div>
   );
 }
