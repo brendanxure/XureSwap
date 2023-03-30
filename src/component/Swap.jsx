@@ -3,11 +3,45 @@ import {AiOutlineArrowDown} from 'react-icons/ai'
 import {SlArrowDown} from 'react-icons/sl'
 import {MdArrowForwardIos} from 'react-icons/md'
 import tokenList from '../tokenList.json'
+import { Modal } from 'antd'
 
 const Swap = () => {
     const [tokenOne , setTokenOne] = useState(tokenList[0])
     const [tokenTwo, setTokenTwo] = useState(tokenList[1])
+    const [tokens, setTokens] = useState(tokenList)
+    const [tokenPort, setTokenPort] = useState('')
+    const [spillage, setSpillage] = useState()
+    const [tokenValue1, setTokenValue1] = useState()
+    const [tokenValue2, setTokenValue2] = useState()
+    console.log(tokenValue2)
 
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
+
+    const showModal =()=> {
+        setIsModalOpen(true)
+        setTokenPort('1')
+    }
+
+    const showModal2 = () => {
+        setIsModalOpen(true)
+        setTokenPort('2')
+    }
+
+    const closeModal =()=> {
+        setIsModalOpen(false)
+        setTokenPort('')
+    }
+
+    const setModifyToken =async(index) => {
+        if (tokenPort === '1') {
+        setTokenOne(index)
+        } else {
+        setTokenTwo(index)
+        }
+        setIsModalOpen(false)
+        setTokenPort('')
+    }
     const tokenChange= () => {
         const one = tokenOne
         const two = tokenTwo
@@ -43,12 +77,24 @@ const Swap = () => {
                     <section className='w-full mx-auto'>
                         <div className='bg-[#141619] p-4 rounded-lg'>
                             <h3 className='text-[#A2A2A2]'>You sell</h3>
+                            <Modal open={isModalOpen} onCancel={closeModal} title="Tokens" className='bg-[#141619]' >
+                                {tokens.map((each, index)=> (
+                                    <ul key={index} className='flex gap-4 cursor-pointer ' onClick={()=>setModifyToken(each)}>
+                                        <img src={each.img} alt={each.ticker} className='w-6 h-6' />
+                                        <div>
+                                            {console.log(index)}
+                                        <li>{each.ticker}</li>
+                                        <li>{each.name}</li>
+                                        </div>
+                                    </ul>
+                                ))}
+                            </Modal>
                             <div className='md:flex md:justify-between gap-4'>
-                                <h3 className='flex w-full bg-[#222429] py-2 px-4 text-center rounded-md my-2 max-w-[20%]'>
+                                <div className='flex w-full bg-[#222429] py-2 gap-2 px-4 text-center rounded-md my-2 max-w-[30%]'>
                                     <img src={tokenOne?.img} className='w-8 h-8' alt={tokenOne?.ticker} />
-                                    <h4>{tokenOne?.name}</h4>
-                                </h3>
-                                <input type='number' placeholder='10' className='text-[40px] bg-transparent outline-none w-full md:justify-end' />
+                                    <h4>{tokenOne?.ticker}</h4><SlArrowDown onClick={showModal} />
+                                </div>
+                                <input type='number' placeholder='0' value={tokenValue1} onChange={(e)=> setTokenValue1(e.target.value)} className='text-[40px] bg-transparent outline-none w-full md:justify-end' />
                             </div>
                             <p className='text-[#A2A2A2]'>~$12.3</p>
                         </div>
@@ -56,11 +102,11 @@ const Swap = () => {
                         <div className='bg-[#141619] p-4 mt-2 rounded-lg'>
                             <h3 className='text-[#A2A2A2]'>You buy</h3>
                             <div className='md:flex md:justify-between gap-4'>
-                                <h3 className='flex bg-[#222429] gap-2 w-full py-2 px-4 text-center rounded-md my-2 max-w-[20%]'>
+                                <div className='flex bg-[#222429] gap-2 w-full py-2 px-4 text-center rounded-md my-2 max-w-[30%]'>
                                     <img src={tokenTwo?.img} className='w-8 h-8' alt={tokenTwo?.ticker} />
-                                    <h4>{tokenTwo?.name}</h4>
-                                </h3>
-                                <input type='number' placeholder='0.0067873949' className='text-[40px] bg-transparent outline-none w-full md:justify-end scrollbar-hide' />
+                                    <h4>{tokenTwo?.ticker}</h4><SlArrowDown onClick={showModal2}/>
+                                </div>
+                                <input type='number' placeholder='0' value={tokenValue2} onChange={(e)=> setTokenValue2(e.target.value)} className='text-[40px] bg-transparent outline-none w-full md:justify-end scrollbar-hide' />
                             </div>
                             <p className='text-[#A2A2A2]'>~$12.3(-0.16%)</p>
                         </div>
@@ -70,7 +116,7 @@ const Swap = () => {
                 <div>
                     <p>Swap Spillage</p>
                     <div className='flex gap-4'>
-                        <p className='bg-[#38393E] px-2 rounded-md py-1 cursor-pointer opacity-70 duration-200 hover:opacity-100'>0.1%</p>
+                        <p onClick={()=> setSpillage(0.1)} className='bg-[#38393E] px-2 rounded-md py-1 cursor-pointer opacity-70 duration-200 hover:opacity-100'>0.1%</p>
                         <p className='bg-[#38393E] px-2 rounded-md py-1 cursor-pointer opacity-70 duration-200 hover:opacity-100'>0.5%</p>
                         <p className='bg-[#38393E] px-2 rounded-md py-1 cursor-pointer opacity-70 duration-200 hover:opacity-100'>1%</p>
                         <p className='bg-[#38393E] px-2 rounded-md py-1 cursor-pointer opacity-70 duration-200 hover:opacity-100'>5%</p>
