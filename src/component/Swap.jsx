@@ -1,53 +1,88 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {AiOutlineArrowDown} from 'react-icons/ai'
 import {SlArrowDown} from 'react-icons/sl'
 import {MdArrowForwardIos} from 'react-icons/md'
 import tokenList from '../tokenList.json'
 import { Modal } from 'antd'
+import axios from 'axios'
 
 const Swap = () => {
     const [tokenOne , setTokenOne] = useState(tokenList[0])
     const [tokenTwo, setTokenTwo] = useState(tokenList[1])
     const [tokens, setTokens] = useState(tokenList)
-    const [tokenPort, setTokenPort] = useState('')
+    const [tokenPort, setTokenPort] = useState(null)
     const [spillage, setSpillage] = useState()
     const [tokenValue1, setTokenValue1] = useState()
     const [tokenValue2, setTokenValue2] = useState()
-    console.log(tokenValue2)
+    const [price, setPrice] = useState([])
+    console.log(tokenValue1)
+    console.log(price?.ratio)
 
     const [isModalOpen, setIsModalOpen] = useState(false)
 
 
-    const showModal =()=> {
+    const showModal =(id)=> {
         setIsModalOpen(true)
-        setTokenPort('1')
-    }
-
-    const showModal2 = () => {
-        setIsModalOpen(true)
-        setTokenPort('2')
+        setTokenPort(id)
     }
 
     const closeModal =()=> {
         setIsModalOpen(false)
-        setTokenPort('')
+        setTokenPort(null)
     }
 
-    const setModifyToken =async(index) => {
-        if (tokenPort === '1') {
+    const inputOnChange = (e) => {
+        setTokenValue1(e.target.value)
+        fetchPrice(tokenOne.address, tokenTwo.address)
+        if(e.target.value && price) {
+            setTokenValue2((e.target.value * price?.ratio).toFixed(2))
+        } else {
+            setTokenValue2(0)
+        }
+        
+    }
+    console.log(tokenOne)
+
+    const setModifyToken =(index) => {
+        setTokenValue1(0)
+        setTokenValue2(0)
+        setPrice(null)
+        if (tokenPort === 1) {
         setTokenOne(index)
+        fetchPrice(index.address, tokenTwo.address)
         } else {
         setTokenTwo(index)
+        fetchPrice(tokenOne.address, index.address)
         }
         setIsModalOpen(false)
-        setTokenPort('')
+        setTokenPort(null)
     }
     const tokenChange= () => {
+        setTokenValue1(0)
+        setTokenValue2(0)
+        setPrice(null)
         const one = tokenOne
         const two = tokenTwo
         setTokenOne(two)
         setTokenTwo(one)
+        fetchPrice(two.address, one.address)
     }
+
+    const fetchPrice = async(one, two)=> {
+        try {
+            const response = await axios.get('http://localhost:4001/tokenPrice', {
+                params: {addressOne: one, addressTwo: two}
+            })
+            console.log(response.data)
+            setPrice(response.data)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    useEffect(()=> {
+        fetchPrice(tokenOne.address, tokenTwo.address)
+
+    },[])
   return (
     <div>
         <div className='w-full grid p-4 gap-4'>
@@ -92,11 +127,11 @@ const Swap = () => {
                             <div className='md:flex md:justify-between gap-4'>
                                 <div className='flex w-full bg-[#222429] py-2 gap-2 px-4 text-center rounded-md my-2 max-w-[30%]'>
                                     <img src={tokenOne?.img} className='w-8 h-8' alt={tokenOne?.ticker} />
-                                    <h4>{tokenOne?.ticker}</h4><SlArrowDown onClick={showModal} />
+                                    <h4>{tokenOne?.ticker}</h4><SlArrowDown onClick={()=>showModal(1)} />
                                 </div>
-                                <input type='number' placeholder='0' value={tokenValue1} onChange={(e)=> setTokenValue1(e.target.value)} className='text-[40px] bg-transparent outline-none w-full md:justify-end' />
+                                <input type='number' placeholder='0' value={tokenValue1} onChange={inputOnChange} className='text-[40px] bg-transparent outline-none w-full md:justify-end' />
                             </div>
-                            <p className='text-[#A2A2A2]'>~$12.3</p>
+                            {/* <p className='text-[#A2A2A2]'>~$12.3</p> */}
                         </div>
                         <div onClick={()=> tokenChange()} className='bg-[#222429] py-3 px-4 absolute top-[50%] left-[47%] rounded-lg'><AiOutlineArrowDown size={20}/></div>
                         <div className='bg-[#141619] p-4 mt-2 rounded-lg'>
@@ -104,11 +139,11 @@ const Swap = () => {
                             <div className='md:flex md:justify-between gap-4'>
                                 <div className='flex bg-[#222429] gap-2 w-full py-2 px-4 text-center rounded-md my-2 max-w-[30%]'>
                                     <img src={tokenTwo?.img} className='w-8 h-8' alt={tokenTwo?.ticker} />
-                                    <h4>{tokenTwo?.ticker}</h4><SlArrowDown onClick={showModal2}/>
+                                    <h4>{tokenTwo?.ticker}</h4><SlArrowDown onClick={()=>showModal(2)}/>
                                 </div>
-                                <input type='number' placeholder='0' value={tokenValue2} onChange={(e)=> setTokenValue2(e.target.value)} className='text-[40px] bg-transparent outline-none w-full md:justify-end scrollbar-hide' />
+                                <input type='number' placeholder='0' value={tokenValue2} disabled={true} className='text-[40px] bg-transparent outline-none w-full md:justify-end scrollbar-hide' />
                             </div>
-                            <p className='text-[#A2A2A2]'>~$12.3(-0.16%)</p>
+                            {/* <p className='text-[#A2A2A2]'>~$12.3(-0.16%)</p> */}
                         </div>
                     </section>
                 </div>
