@@ -5,6 +5,33 @@ import { store } from './app/store';
 import App from './App';
 import 'antd/dist/reset.css';
 import './index.css';
+import '@rainbow-me/rainbowkit/styles.css';
+import {
+  getDefaultWallets,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit';
+import { configureChains, createClient, WagmiConfig } from 'wagmi';
+import { mainnet, polygon, optimism, arbitrum } from 'wagmi/chains';
+import { publicProvider } from 'wagmi/providers/public';
+
+
+const { chains, provider } = configureChains(
+  [mainnet, polygon, optimism, arbitrum],
+  [
+    publicProvider()
+  ]
+);
+
+const { connectors } = getDefaultWallets({
+  appName: 'airdrop',
+  chains,
+});
+
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider
+})
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -12,7 +39,11 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <WagmiConfig client={wagmiClient}>
+        <RainbowKitProvider chains={chains} >
+          <App />
+      </RainbowKitProvider>
+      </WagmiConfig>
     </Provider>
   </React.StrictMode>
 );

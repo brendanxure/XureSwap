@@ -5,6 +5,7 @@ import {MdArrowForwardIos} from 'react-icons/md'
 import tokenList from '../tokenList.json'
 import { Modal } from 'antd'
 import axios from 'axios'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 const Swap = () => {
     const [tokenOne , setTokenOne] = useState(tokenList[0])
@@ -86,7 +87,7 @@ const Swap = () => {
   return (
     <div>
         <div className='w-full grid p-4 gap-4'>
-            <button className='bg-[#3898FF] justify-self-end px-4 py-2 font-bold relative text-[14px] text-white rounded-lg hover:scale-105 duration-200 ease-in'>Connect Wallet</button>
+            <button className='justify-self-end'><ConnectButton /></button>
             <h1 className='text-white text-[30px] md:text-[36px] font-bold mt-4 text-center'>Arbitrum Airdrop X DefiLlama</h1>
             <p className='text-[#ED8936] text-center'>To get your tsx accepted you need to increase priority fee and max fee in metamask</p>
             <div className='grid p-4 lg:max-w-[60%] w-full mx-auto border-[rgb(47,51,60)] border-[1px] items-center justify-center w-full mx-auto text-white '>
@@ -112,9 +113,9 @@ const Swap = () => {
                     <section className='w-full mx-auto'>
                         <div className='bg-[#141619] p-4 rounded-lg'>
                             <h3 className='text-[#A2A2A2]'>You sell</h3>
-                            <Modal open={isModalOpen} onCancel={closeModal} title="Tokens" className='bg-[#141619]' >
+                            <Modal open={isModalOpen} onCancel={closeModal} title="Tokens" className='text-white' >
                                 {tokens.map((each, index)=> (
-                                    <ul key={index} className='flex gap-4 cursor-pointer ' onClick={()=>setModifyToken(each)}>
+                                    <ul key={index} className='flex gap-4 cursor-pointer items-center my-4' onClick={()=>setModifyToken(each)}>
                                         <img src={each.img} alt={each.ticker} className='w-6 h-6' />
                                         <div>
                                             {console.log(index)}
@@ -157,7 +158,7 @@ const Swap = () => {
                         <p className='bg-[#38393E] px-2 rounded-md py-1 cursor-pointer opacity-70 duration-200 hover:opacity-100'>5%</p>
                     </div>
                 </div>
-                <button className='bg-[#A2CDFF] py-2 text-[#1A202C] font-semibold my-4 rounded-lg hover:bg-[#7ABBFF] duration-200'>Connect Wallet</button>
+                <button className='bg-[#A2CDFF] py-2 text-[#1A202C] font-semibold my-4 rounded-lg hover:bg-[#7ABBFF] duration-200'>Swap</button>
             </div>
         </div>
     </div>

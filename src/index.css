@@ -15,6 +15,14 @@ h4 {
   font-size: 14px
 }
 
+.ant-modal-content {
+  background: #141619 !important;
+}
+.ant-modal-title {
+  background: #141619 !important;
+  color: white !important;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
