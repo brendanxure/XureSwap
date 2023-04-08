@@ -6,6 +6,7 @@ import tokenList from '../tokenList.json'
 import { Modal } from 'antd'
 import axios from 'axios'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
+import { fetchToken } from '@wagmi/core'
 
 const Swap = () => {
     const [tokenOne , setTokenOne] = useState(tokenList[0])
@@ -43,6 +44,13 @@ const Swap = () => {
         
     }
     console.log(tokenOne)
+
+    const refreshPrice = () => {
+        setTokenValue1(0)
+        setTokenValue2(0)
+        setPrice(null)
+        fetchToken(tokenOne.address, tokenTwo.address)
+    }
 
     const setModifyToken =(index) => {
         setTokenValue1(0)
@@ -148,7 +156,7 @@ const Swap = () => {
                         </div>
                     </section>
                 </div>
-                <button className='justify-self-end bg-[#A2CDFF] px-4 py-2 my-2 rounded-lg text-[#1A202C] font-semibold hover:bg-[#7ABBFF] duration-200'>Refresh Price</button>
+                <button onClick={refreshPrice} className='justify-self-end bg-[#A2CDFF] px-4 py-2 my-2 rounded-lg text-[#1A202C] font-semibold hover:bg-[#7ABBFF] duration-200'>Refresh Price</button>
                 <div>
                     <p>Swap Spillage</p>
                     <div className='flex gap-4'>
