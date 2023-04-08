@@ -124,24 +124,24 @@ const Swap = () => {
                                     </ul>
                                 ))}
                             </Modal>
-                            <div className='md:flex md:justify-between gap-4'>
-                                <div className='flex w-full bg-[#222429] py-2 gap-2 px-4 text-center rounded-md my-2 max-w-[30%]'>
+                            <div className='md:flex md:justify-between gap-4 w-full flex-row-reverse'>
+                                <div className='flex w-full bg-[#222429] py-2 gap-2 px-4 items-center text-center rounded-md my-2 max-w-[30%]'>
                                     <img src={tokenOne?.img} className='w-8 h-8' alt={tokenOne?.ticker} />
                                     <h4>{tokenOne?.ticker}</h4><SlArrowDown onClick={()=>showModal(1)} />
                                 </div>
-                                <input type='number' placeholder='0' value={tokenValue1} onChange={inputOnChange} className='text-[40px] bg-transparent outline-none w-full md:justify-end' />
+                                <input type='number' placeholder='0' value={tokenValue1} onChange={inputOnChange} disabled={!price} className='text-[40px] bg-transparent outline-none md:justify-end' />
                             </div>
                             {/* <p className='text-[#A2A2A2]'>~$12.3</p> */}
                         </div>
                         <div onClick={()=> tokenChange()} className='bg-[#222429] py-3 px-4 absolute top-[50%] left-[47%] rounded-lg'><AiOutlineArrowDown size={20}/></div>
-                        <div className='bg-[#141619] p-4 mt-2 rounded-lg'>
+                        <div className='bg-[#141619] p-4 mt-2 rounded-lg w-full'>
                             <h3 className='text-[#A2A2A2]'>You buy</h3>
-                            <div className='md:flex md:justify-between gap-4'>
-                                <div className='flex bg-[#222429] gap-2 w-full py-2 px-4 text-center rounded-md my-2 max-w-[30%]'>
+                            <div className='md:flex md:justify-between gap-4 flex-row-reverse'>
+                                <div className='flex bg-[#222429] gap-2 py-2 px-4 text-center rounded-md my-2 w-full max-w-[30%] items-center'>
                                     <img src={tokenTwo?.img} className='w-8 h-8' alt={tokenTwo?.ticker} />
                                     <h4>{tokenTwo?.ticker}</h4><SlArrowDown onClick={()=>showModal(2)}/>
                                 </div>
-                                <input type='number' placeholder='0' value={tokenValue2} disabled={true} className='text-[40px] bg-transparent outline-none w-full md:justify-end scrollbar-hide' />
+                                <input type='number' placeholder='0' value={tokenValue2} disabled={true} className='text-[40px] bg-transparent outline-none md:justify-end scrollbar-hide' />
                             </div>
                             {/* <p className='text-[#A2A2A2]'>~$12.3(-0.16%)</p> */}
                         </div>
