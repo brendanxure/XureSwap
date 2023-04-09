@@ -134,9 +134,9 @@ const Swap = () => {
                                 ))}
                             </Modal>
                             <div className='md:flex md:justify-between gap-4 w-full flex-row-reverse'>
-                                <div className='flex w-full bg-[#222429] py-2 gap-2 justify-evenly px-4 items-center text-center rounded-md my-2 w-[10rem]'>
+                                <div className='flex w-full bg-[#222429] py-2 gap-2 justify-evenly px-4 items-center text-center rounded-md my-2 w-fit'>
                                     <img src={tokenOne?.img} className='w-8 h-8' alt={tokenOne?.ticker} />
-                                    <h4>{tokenOne?.ticker}</h4><SlArrowDown onClick={()=>showModal(1)} />
+                                    <h4 className='flex items-center gap-2'>{tokenOne?.ticker}<SlArrowDown onClick={()=>showModal(1)} /></h4>
                                 </div>
                                 <input type='number' placeholder='0' value={tokenValue1} onChange={inputOnChange} disabled={!price} className='text-[40px] bg-transparent outline-none md:justify-end w-full' />
                             </div>
@@ -146,9 +146,9 @@ const Swap = () => {
                         <div className='bg-[#141619] p-4 mt-2 rounded-lg w-full'>
                             <h3 className='text-[#A2A2A2]'>You buy</h3>
                             <div className='md:flex md:justify-between gap-4 flex-row-reverse'>
-                                <div className='flex bg-[#222429] gap-2 justify-evenly py-2 px-4 text-center rounded-md my-2 w-full w-[10rem] items-center'>
+                                <div className='flex bg-[#222429] gap-2 justify-evenly py-2 px-4 text-center rounded-md my-2 w-full w-fit items-center'>
                                     <img src={tokenTwo?.img} className='w-8 h-8' alt={tokenTwo?.ticker} />
-                                    <h4>{tokenTwo?.ticker}</h4><SlArrowDown onClick={()=>showModal(2)}/>
+                                    <h4 className='flex items-center gap-2'>{tokenTwo?.ticker}<SlArrowDown onClick={()=>showModal(2)}/></h4>
                                 </div>
                                 <input type='number' placeholder='0' value={tokenValue2} disabled={true} className='text-[40px] bg-transparent outline-none md:justify-end scrollbar-hide w-full' />
                             </div>
