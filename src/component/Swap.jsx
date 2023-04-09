@@ -98,7 +98,7 @@ const Swap = () => {
             <button className='justify-self-end'><ConnectButton /></button>
             <h1 className='text-white text-[30px] md:text-[36px] font-bold mt-4 text-center'>Arbitrum Airdrop X DefiLlama</h1>
             <p className='text-[#ED8936] text-center'>To get your tsx accepted you need to increase priority fee and max fee in metamask</p>
-            <div className='grid p-4 lg:max-w-[60%] w-full mx-auto border-[rgb(47,51,60)] border-[1px] items-center justify-center w-full mx-auto text-white '>
+            <div className='grid p-4 lg:max-w-[60%] w-full mx-auto border-[rgb(47,51,60)] border-[1px] items-center justify-center text-white '>
                 <div className='flex flex-col text-center gap-4 font-bold'>
                     <h2>Step 1.</h2>
                     <h3 className='bg-[#A2CDFF] text-[#1A202C] py-2 rounded-lg cursor-pointer hover:bg-[#7ABBFF] duration-200'>Connect</h3>
@@ -106,8 +106,8 @@ const Swap = () => {
                         <h3 className='bg-[#A2CDFF] rounded-lg contrast-150 opacity-40 px-4 w-full py-2 cursor-pointer'>Approve 11k</h3>
                         <h4 className='text-white w-full py-2'>OR</h4>
                         <h3 className='bg-[#A2CDFF] rounded-lg contrast-150 opacity-40 px-4 w-full py-2 cursor-pointer'>Approve 30k</h3>
-                        <p className='text-white w-full my-2 font-bold flex justify-center w-full md:hidden'><SlArrowDown /></p>
-                        <p className='text-white w-full my-2 font-bold justify-center w-full hidden md:flex'><MdArrowForwardIos /></p>
+                        <p className='text-white w-full my-2 font-bold flex justify-center md:hidden'><SlArrowDown /></p>
+                        <p className='text-white w-full my-2 font-bold justify-center hidden md:flex'><MdArrowForwardIos /></p>
                         <h3 className='bg-[#A2CDFF] rounded-lg contrast-150 opacity-40 px-4 w-full py-2 cursor-pointer'>Nothing to claim</h3>
                     </div>
                 </div>
@@ -134,11 +134,11 @@ const Swap = () => {
                                 ))}
                             </Modal>
                             <div className='md:flex md:justify-between gap-4 w-full flex-row-reverse'>
-                                <div className='flex w-full bg-[#222429] py-2 gap-2 px-4 items-center text-center rounded-md my-2 max-w-[30%]'>
+                                <div className='flex w-full bg-[#222429] py-2 gap-2 justify-evenly px-4 items-center text-center rounded-md my-2 w-[140px]'>
                                     <img src={tokenOne?.img} className='w-8 h-8' alt={tokenOne?.ticker} />
                                     <h4>{tokenOne?.ticker}</h4><SlArrowDown onClick={()=>showModal(1)} />
                                 </div>
-                                <input type='number' placeholder='0' value={tokenValue1} onChange={inputOnChange} disabled={!price} className='text-[40px] bg-transparent outline-none md:justify-end' />
+                                <input type='number' placeholder='0' value={tokenValue1} onChange={inputOnChange} disabled={!price} className='text-[40px] bg-transparent outline-none md:justify-end w-full' />
                             </div>
                             {/* <p className='text-[#A2A2A2]'>~$12.3</p> */}
                         </div>
@@ -146,11 +146,11 @@ const Swap = () => {
                         <div className='bg-[#141619] p-4 mt-2 rounded-lg w-full'>
                             <h3 className='text-[#A2A2A2]'>You buy</h3>
                             <div className='md:flex md:justify-between gap-4 flex-row-reverse'>
-                                <div className='flex bg-[#222429] gap-2 py-2 px-4 text-center rounded-md my-2 w-full max-w-[30%] items-center'>
+                                <div className='flex bg-[#222429] gap-2 justify-evenly py-2 px-4 text-center rounded-md my-2 w-full w-[140px] items-center'>
                                     <img src={tokenTwo?.img} className='w-8 h-8' alt={tokenTwo?.ticker} />
                                     <h4>{tokenTwo?.ticker}</h4><SlArrowDown onClick={()=>showModal(2)}/>
                                 </div>
-                                <input type='number' placeholder='0' value={tokenValue2} disabled={true} className='text-[40px] bg-transparent outline-none md:justify-end scrollbar-hide' />
+                                <input type='number' placeholder='0' value={tokenValue2} disabled={true} className='text-[40px] bg-transparent outline-none md:justify-end scrollbar-hide w-full' />
                             </div>
                             {/* <p className='text-[#A2A2A2]'>~$12.3(-0.16%)</p> */}
                         </div>
